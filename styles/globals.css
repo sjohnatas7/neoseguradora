@@ -5,7 +5,7 @@
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 192, 100%, 28%;
+    --foreground: 0, 0%, 10%;
 
     --muted: 192, 100%, 7%;
     --muted-foreground: 215.4 16.3% 46.9%;
@@ -19,7 +19,7 @@
     --card: 0 0% 100%;
     --card-foreground: 222.2 47.4% 11.2%;
 
-    --primary: 192, 100%, 28%;
+    --primary: 348, 100%, 44%;
     --primary-foreground: 210 40% 98%;
 
     --secondary: 210 40% 96.1%;
@@ -95,14 +95,14 @@
   content: "";
   position: absolute;
   left: 0;
-  background: hsl(var(--foreground));
+  background: hsl(var(--primary));
   width: 0;
   height: 100%;
   transition: width .35s ease-in-out, left .35s cubic-bezier(.105, .265, .17, .975) 0.5s;
 }
 
 .loaded .textline {
-  color: hsl(var(--foreground));
+  color: hsl(var(--primary));
 }
 
 .loaded .textline:before {
@@ -111,4 +111,119 @@
 }
 .button::before {
   background-color: #E5E9F6;
+}
+
+/* Header styles */
+.header {
+  @apply flex justify-between items-center py-4;
+}
+
+.logo {
+  @apply text-lg font-bold;
+}
+
+.nav {
+  @apply flex justify-end items-center;
+}
+
+.nav-link {
+  @apply text-sm font-medium text-gray-600 hover:text-gray-900;
+}
+
+/* Hero styles */
+.hero {
+  @apply flex justify-center items-center mb-4;
+}
+
+.hero-title {
+  @apply text-3xl font-bold;
+}
+
+.hero-subtitle {
+  @apply text-lg font-medium;
+}
+
+.hero-cta {
+  @apply bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded;
+}
+
+/* Problem and Solution styles */
+.problem-solution {
+  @apply flex flex-col items-center py-4;
+}
+
+.problem-statement {
+  @apply text-lg font-medium;
+}
+
+.solution-statement {
+  @apply text-lg font-medium;
+}
+
+.icon {
+  @apply w-12 h-12 text-gray-600;
+}
+
+/* Benefits styles */
+.benefits {
+  @apply flex flex-wrap justify-center items-center py-4;
+}
+
+.benefit {
+  @apply flex flex-col items-center p-4;
+}
+
+.benefit-icon {
+  @apply w-12 h-12 text-gray-600;
+}
+
+.benefit-text {
+  @apply text-sm font-medium;
+}
+
+/* Call to Action styles */
+.call-to-action {
+  @apply flex justify-center items-center py-4 bg-orange-500 hover:bg-orange-700;
+}
+
+.call-to-action-text {
+  @apply text-lg font-bold text-white;
+}
+
+.call-to-action-cta {
+  @apply bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded;
+}
+
+/* Trust and Testimonials styles */
+.trust {
+  @apply flex flex-col items-center py-4;
+}
+
+.trust-title {
+  @apply text-lg font-bold;
+}
+
+.testimonial {
+  @apply flex flex-col items-center p-4;
+}
+
+.testimonial-text {
+  @apply text-sm font-medium;
+}
+
+.testimonial-author {
+  @apply text-sm font-medium text-gray-600;
+}
+
+/* Footer styles */
+.footer {
+  @apply flex justify-center items-center py-4 bg-gray-200;
+}
+
+.footer-text {
+  @apply text-sm font-medium text-gray-600;
+}
+
+.footer-contact {
+  @apply text-sm font-medium text-gray-600;
 }

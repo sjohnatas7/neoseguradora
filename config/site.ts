@@ -10,20 +10,24 @@ export const siteConfig = {
       href: "titulo",
     },
     {
-      title: "Como Funciona?",
-      href: "como-funciona",
+      title: "Segurança",
+      href: "seguranca",
     },
     {
-      title: "Indicações",
-      href: "indicacoes",
+      title: "Vantagens",
+      href: "vantagens",
     },
     {
-      title: "Profisionais",
-      href: "profissionais",
+      title: "Cotação",
+      href: "cotacao",
     },
     {
-      title: "Fale Conosco",
-      href: "contato",
+      title: "Depoimentos",
+      href: "depoimentos",
+    },
+    {
+      title: "FAQ",
+      href: "faq",
     }
   ],
   links: {

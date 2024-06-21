@@ -8,11 +8,14 @@ import { NavItem } from "@/types/nav"
 import { cn } from "@/lib/utils"
 
 interface MainNavProps {
-  items?: NavItem[]
+  items?: NavItem[],
+  logo?: string;
 }
 
-export function MainNav({ items }: MainNavProps) {
+export function MainNav({ items, logo }: MainNavProps) {
   const [isOpen, setIsOpen] = React.useState(false) // State for mobile menu visibility
+  const [currentSection, setCurrentSection] = React.useState<string | null>(null)
+
   function scrollToSection(sectionId: string) {
     const section = document.getElementById(sectionId)
     section?.scrollIntoView({ behavior: "smooth" })
@@ -23,21 +26,52 @@ export function MainNav({ items }: MainNavProps) {
     setIsOpen(!isOpen) // Toggle menu state on button click
   }
 
+  React.useEffect(() => {
+    const handleScroll = () => {
+      const sections = document.querySelectorAll("section")
+      const options = {
+        root: null,
+        rootMargin: "0px",
+        threshold: 0.3, // Consider the section visible if 50% of it is in view
+      }
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setCurrentSection(entry.target.id)
+          }
+        })
+      }, options)
+
+      sections.forEach((section) => {
+        observer.observe(section)
+      })
+
+      return () => {
+        sections.forEach((section) => {
+          observer.unobserve(section)
+        })
+      }
+    }
+
+    handleScroll()
+  }, [])
+
   return (
-    <div className=" z-10 flex size-full justify-between gap-6 md:gap-10">
+    <div className="z-10 flex size-full justify-between gap-6 md:gap-10">
       <Link href="/" className="flex items-center space-x-2">
         <Image
           width={30}
           height={60}
           alt="logo"
-          src="/imagens/Logo Fundo Lavender 1.png"
+          src={logo || ""}
           className="size-full"
         />
       </Link>
 
       {items?.length ? (
         <>
-          <nav className="hidden gap-6  md:flex">
+          <nav className="hidden gap-6 md:flex">
             {items?.map(
               (item, index) =>
                 item.href && (
@@ -45,7 +79,10 @@ export function MainNav({ items }: MainNavProps) {
                     key={index}
                     onClick={() => scrollToSection(item.href)}
                     className={cn(
-                      "flex items-center text-sm font-medium text-muted-foreground",
+                      "flex items-center text-sm font-medium",
+                      currentSection === item.href
+                        ? "text-primary underline underline-offset-4"
+                        : "text-primary",
                       item.disabled && "cursor-not-allowed opacity-80"
                     )}
                   >
@@ -76,7 +113,12 @@ export function MainNav({ items }: MainNavProps) {
                     <li key={index}>
                       <button
                         onClick={() => scrollToSection(item.href)}
-                        className="text-sm font-medium hover:underline"
+                        className={cn(
+                          "text-sm font-medium",
+                          currentSection === item.href
+                            ? "text-primary underline underline-offset-4"
+                            : "text-primary"
+                        )}
                       >
                         {item.title}
                       </button>
