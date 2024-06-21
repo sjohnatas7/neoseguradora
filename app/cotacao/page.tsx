@@ -1,17 +1,16 @@
-import FAQSection from "@/components/accordion-faq"
-import BenefitsSection from "@/components/benefits-section"
-import CTA from "@/components/cta"
-import Footer from "@/components/footer"
 import Headline from "@/components/headline"
-import ProblemAndSolution from "@/components/problem-solution"
-import { SiteHeader } from "@/components/site-header"
-import Testimonials from "@/components/testimonal"
+import BenefitsSection from "@/components/benefits-section"
+import Footer from "@/components/footer"
 import WhatsappIcon from "@/components/whatsapp"
+import ProblemAndSolution from "@/components/problem-solution"
+import CTA from "@/components/cta"
+import Testimonials from "@/components/testimonal"
+import FAQSection from "@/components/accordion-faq"
 
 function IndexPage() {
+ 
   return (
     <>
-      <SiteHeader />
       <Headline></Headline>
       <ProblemAndSolution></ProblemAndSolution>
       <BenefitsSection></BenefitsSection>
@@ -24,4 +23,5 @@ function IndexPage() {
   )
 }
 
-export default IndexPage
+
+export default IndexPage;

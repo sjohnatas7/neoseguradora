@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useState } from 'react';
+import { useInView } from "react-intersection-observer";
 
 interface FAQItemPros{
   question: string;
@@ -64,11 +65,22 @@ const faqData = [
 
 
 const FAQSection = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const { ref, inView } = useInView({
+    threshold: 0.2, // Trigger animation when 20% of the section is in view
+    triggerOnce: true, // Only trigger once
+  });
+
+  if (inView && !isVisible) {
+    setIsVisible(true);
+  }
   return (
     <section className="bg-gray-50 py-10 sm:py-16 lg:py-24" id="faq">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-3xl font-bold leading-tight text-black sm:text-4xl lg:text-5xl">Perguntas mais frequentes</h2>
+          <h2 className={`${isVisible ? "animate-slide-in-left" : "invisible"} text-3xl font-bold leading-tight text-black sm:text-4xl lg:text-5xl`}
+          ref={ref}
+          >Perguntas mais frequentes</h2>
         </div>
         <div className="mx-auto mt-8 max-w-3xl space-y-4 md:mt-16">
           {faqData.map((faq, index) => (

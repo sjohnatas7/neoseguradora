@@ -18,7 +18,7 @@ export default function Headline() {
   }
   return (
     <section
-      className="flex min-h-screen items-center bg-left-top"
+      className="flex min-h-screen items-center bg-center md:bg-left-top"
       style={{
         backgroundImage: 'url("/imagens/heroImage.jpg")',
         backgroundSize: "cover",

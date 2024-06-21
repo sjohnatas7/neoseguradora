@@ -8,8 +8,7 @@ import {
   faMoneyBillWave,
 } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-
-// Importing Font Awesome icons
+import { useInView } from "react-intersection-observer";
 
 interface BenefitProps {
   title: string
@@ -18,6 +17,7 @@ interface BenefitProps {
 }
 
 const Benefit = ({ title, description, icon }: BenefitProps) => {
+
   const [isHovered, setIsHovered] = useState(false)
 
   return (
@@ -38,14 +38,24 @@ const Benefit = ({ title, description, icon }: BenefitProps) => {
   )
 }
 
-const BenefitsSection = () => (
+const BenefitsSection = () => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  const { ref, inView } = useInView({
+    threshold: 0.5, // Trigger animation when 20% of the section is in view
+    triggerOnce: true, // Only trigger once
+  });
+  if (inView && !isVisible) {
+    setIsVisible(true);
+  }
+  return(
   <section className="bg-gray-50 py-20" id="vantagens"
   >
     <div className="container mx-auto px-4">
       <h2 className="mb-10 text-center text-3xl font-bold text-primary">
         Por que escolher nossa ferramenta de cotação?
       </h2>
-      <div className="grid gap-6 md:grid-cols-3">
+      <div className={`grid gap-6 md:grid-cols-3 ${isVisible ? "animate-slide-down" : "invisible"}`} ref={ref}>
         <Benefit
           title="Comparação fácil de opções de seguro"
           description="Com nossa ferramenta, você pode comparar opções de seguro de diferentes empresas em apenas alguns minutos."
@@ -70,5 +80,5 @@ const BenefitsSection = () => (
     </div>
   </section>
 )
-
+}
 export default BenefitsSection
